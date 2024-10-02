@@ -48,6 +48,7 @@ export class PokemonMarkup extends Component {
               }
               width={300}
               height={300}
+              alt={this.props.pokemonInfo.name}
             ></img>
           )}
           {this.state.namImg === 2 && (
@@ -57,6 +58,7 @@ export class PokemonMarkup extends Component {
               }
               width={300}
               height={300}
+              alt={this.props.pokemonInfo.name}
             ></img>
           )}
           {this.state.namImg === 3 && (
@@ -64,6 +66,7 @@ export class PokemonMarkup extends Component {
               src={this.props.pokemonInfo.sprites.other.home.front_default}
               width={300}
               height={300}
+              alt={this.props.pokemonInfo.name}
             ></img>
           )}
           {this.state.namImg === 4 && (
@@ -71,6 +74,7 @@ export class PokemonMarkup extends Component {
               src={this.props.pokemonInfo.sprites.other.showdown.front_shiny}
               width={300}
               height={300}
+              alt={this.props.pokemonInfo.name}
             ></img>
           )}
         </div>
