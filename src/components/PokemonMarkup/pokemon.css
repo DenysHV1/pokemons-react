@@ -1,3 +1,14 @@
+h1{
+  margin: 0;
+}
+
+.description{
+  font-style: italic;
+  font-weight: 600;
+  color: black;
+}
+
+
 .pokemonContainer {
   display: flex;
   flex-direction: column;
@@ -60,7 +71,6 @@
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
-  margin-bottom: 50px;
 }
 
 .buttonsContainerInner {

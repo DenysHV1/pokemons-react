@@ -9,7 +9,7 @@ export class PokemonMarkup extends Component {
   handlerOne = () => {
     this.setState({ namImg: 1 });
   };
-  
+
   handlerTwo = () => {
     this.setState({ namImg: 2 });
   };
@@ -95,9 +95,9 @@ export class PokemonMarkup extends Component {
         </div>
         <div className="pokemonInfo">
           <h1>{this.props.pokemonInfo.name}</h1>
-          <p>Height {this.props.pokemonInfo.height} sm</p>
-          <p>Weight {this.props.pokemonInfo.weight} gr</p>
-          <p>Damage {this.props.pokemonInfo.base_experience}</p>
+          <p className='description' >Height: {this.props.pokemonInfo.height} sm</p>
+          <p className='description' >Weight: {this.props.pokemonInfo.weight} gr</p>
+          <p className='description' >Damage: {this.props.pokemonInfo.base_experience}</p>
         </div>
       </div>
     );
