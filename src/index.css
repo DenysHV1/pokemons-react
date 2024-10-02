@@ -1,4 +1,6 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
+
+@import './components/PokemonMarkup/pokemon.css';
 
 body {
   margin: 0;
@@ -7,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+background: linear-gradient(90deg,#010114,#342ebc,#010114);
 }
 
 code {
