@@ -9,6 +9,7 @@ export class PokemonMarkup extends Component {
   handlerOne = () => {
     this.setState({ namImg: 1 });
   };
+  
   handlerTwo = () => {
     this.setState({ namImg: 2 });
   };
