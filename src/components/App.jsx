@@ -33,8 +33,6 @@ export class App extends Component {
   };
 
   handlerCloseModal = e => {
-    console.log(e.currentTarget);
-    console.log(e.target);
     if (e.currentTarget === e.target) {
       this.setState({
         pokemonInfo: null,
@@ -95,7 +93,9 @@ export class App extends Component {
         <button onClick={this.handlerShoveButtons} className="shove-buttons">
           Shove Buttons
         </button>
-        <button className='randomBtn' onClick={this.handlerRandomButtons}>random</button>
+        <button className="randomBtn" onClick={this.handlerRandomButtons}>
+          random
+        </button>
       </>
     );
   }

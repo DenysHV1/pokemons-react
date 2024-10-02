@@ -20,7 +20,6 @@ export class PokemonMarkup extends Component {
   };
 
   specialBg = base_experience => {
-    console.log(base_experience);
     if (base_experience < 100) {
       return 'linear-gradient(90deg,#55a246,#70ca94,#a3f0d8)';
     } else if (base_experience > 100 && base_experience < 200) {
