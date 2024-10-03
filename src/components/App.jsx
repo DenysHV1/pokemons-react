@@ -11,6 +11,8 @@ export class App extends Component {
     modal: 'modal-overlay',
     blackOnBtn: true,
     buttonsInfo,
+    btnRandom: 'buttonStyle',
+    intervalRandom: null,
   };
 
   async componentDidUpdate(_, prevState) {
@@ -27,9 +29,10 @@ export class App extends Component {
   }
 
   handlerButtons = e => {
-    if (e.target.textContent.length < 15) {
-      this.setState({ pokemonName: e.target.textContent });
-    }
+    this.setState({
+      pokemonName: e.target.dataset.name,
+      modal: 'modal-overlay is-open',
+    });
   };
 
   handlerCloseModal = e => {
@@ -42,10 +45,12 @@ export class App extends Component {
     }
   };
 
-  openModal = () => {
-    if (this.state.pokemonInfo) {
-      this.setState({ modal: 'modal-overlay is-open' });
-    }
+  handlerCloseModal2 = () => {
+    this.setState({
+      pokemonInfo: null,
+      pokemonName: '',
+      modal: 'modal-overlay',
+    });
   };
 
   handlerShoveButtons = () => {
@@ -68,6 +73,13 @@ export class App extends Component {
     this.setState(({ buttonsInfo }) => ({
       buttonsInfo: buttonsInfo.toSorted((a, b) => a.id - b.id),
     }));
+
+    setTimeout(() => {
+      this.setState({ btnRandom: 'buttonStyle random' });
+    }, 100);
+    setTimeout(() => {
+      this.setState({ btnRandom: 'buttonStyle' });
+    }, 200);
   };
 
   render() {
@@ -77,16 +89,15 @@ export class App extends Component {
           <ButtonsMarkup
             shoveBtn={this.state.blackOnBtn}
             buttonsInfo={this.state.buttonsInfo}
+            btnRandom={this.state.btnRandom}
           ></ButtonsMarkup>
         </div>
         {this.state.pokemonInfo && (
-          <div
-            onClick={this.handlerCloseModal}
-            className="modal-overlay is-open"
-          >
+          <div onClick={this.handlerCloseModal} className={this.state.modal}>
             <PokemonMarkup
               pokemonInfo={this.state.pokemonInfo}
               pokemonName={this.state.pokemonName}
+              closeModal2={this.handlerCloseModal2}
             ></PokemonMarkup>
           </div>
         )}

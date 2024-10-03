@@ -1,8 +1,9 @@
-export const ButtonsMarkup = ({ shoveBtn, buttonsInfo }) => {
+export const ButtonsMarkup = ({ shoveBtn, buttonsInfo, btnRandom }) => {
   return buttonsInfo.map(({ name }, idx) => (
-    <div className="buttonsContainerInner" key={idx}>
-      <button className="buttonStyle">{name}</button>
-      {shoveBtn && <span className="hide-btn"></span>}
-    </div>
+    <button key={idx} className={btnRandom} data-name={name}>
+      {name} {shoveBtn && <span data-name={name} className="hide-btn"></span>}
+    </button>
   ));
 };
+
+//

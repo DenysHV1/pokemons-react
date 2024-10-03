@@ -1,31 +1,4 @@
-h1{
-  margin: 0;
-}
-
-.description{
-  font-style: italic;
-  font-weight: 600;
-  color: black;
-}
-
-
-.pokemonContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 350px;
-  border-radius: 7px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  border: 0.3px solid black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/*todo - ButtonsMarkup*/
 .buttonStyle {
   text-decoration: none;
   border: 1px solid rgb(146, 148, 248);
@@ -38,6 +11,10 @@ h1{
   background-color: transparent;
   cursor: pointer;
   min-width: 270px;
+}
+
+.buttonStyle.random {
+  background-color: #f4f4f4;
 }
 
 .buttonStyle:hover {
@@ -64,19 +41,6 @@ h1{
   left: 100%;
 }
 
-.buttonsContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-}
-
-.buttonsContainerInner {
-  position: relative;
-}
-
 .hide-btn {
   width: 200px;
   height: 33px;
@@ -84,6 +48,42 @@ h1{
   position: absolute;
   top: 14px;
   left: 39px;
+}
+
+/*todo end*/
+
+/*todo - App*/
+
+.modal-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(46, 47, 66, 0.4);
+  z-index: 999;
+  opacity: 1;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-overlay.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  margin-bottom: 60px;
 }
 
 .shove-buttons {
@@ -119,28 +119,59 @@ h1{
   left: 20px;
   opacity: 0.6;
 }
+/*todo end*/
 
-/* /// */
-.modal-overlay {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  background-color: rgba(46, 47, 66, 0.4);
-  z-index: 999;
-  opacity: 1;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+/*todo PokemonMarkup */
+.pokemonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 350px;
+  border-radius: 7px;
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  border: 0.3px solid black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  filter: contrast(150%);
+  filter: drop-shadow(150%);
 }
 
-.modal-overlay.is-open {
-  pointer-events: auto;
-  opacity: 1;
-  visibility: visible;
+.pokemonImgContainer {
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 10px;
+  background-image: url(../../img/bg-pokemon.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.closeModal2 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: gold;
+  outline: none;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  border-radius: 50%;
+  padding: 5px;
+  width: 27px;
 }
 
 .buttonChangeImg {
@@ -148,9 +179,60 @@ h1{
   color: white;
   border-radius: 50%;
   padding: 8px;
+  width: 50px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 .buttonsContainer {
   display: flex;
   gap: 10px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.description {
+  font-style: italic;
+  font-weight: 600;
+  color: black;
+  margin: 10px;
+}
+
+.damage {
+  font-size: 18px;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px black, 0 0 0.2em gold, 0 0 0.2em gold;
+}
+
+.pokemonInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 100px;
+}
+
+@media screen and (max-width: 340px) {
+  .pokemonContainer {
+    max-width: 320px;
+    padding: 5px;
+  }
+
+  .pokemonImgContainer {
+    padding: 5px;
+  }
+
+  #root {
+    padding: 10px;
+  }
 }

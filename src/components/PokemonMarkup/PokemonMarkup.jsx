@@ -3,7 +3,6 @@ import { Component } from 'react';
 export class PokemonMarkup extends Component {
   state = {
     namImg: 1,
-    modal: false,
   };
 
   handlerOne = () => {
@@ -40,6 +39,9 @@ export class PokemonMarkup extends Component {
           ),
         }}
       >
+        <button className="closeModal2" onClick={this.props.closeModal2}>
+          ×
+        </button>
         <div className="pokemonImgContainer">
           {this.state.namImg === 1 && (
             <img
@@ -95,9 +97,17 @@ export class PokemonMarkup extends Component {
         </div>
         <div className="pokemonInfo">
           <h1>{this.props.pokemonInfo.name}</h1>
-          <p className='description' >Height: {this.props.pokemonInfo.height} sm</p>
-          <p className='description' >Weight: {this.props.pokemonInfo.weight} gr</p>
-          <p className='description' >Damage: {this.props.pokemonInfo.base_experience}</p>
+          <ul>
+            <li className="description">
+              Height: {this.props.pokemonInfo.height} sm
+            </li>
+            <li className="description">
+              Weight: {this.props.pokemonInfo.weight} gr
+            </li>
+            <li className="description damage">
+              Damage: {this.props.pokemonInfo.base_experience}
+            </li>
+          </ul>
         </div>
       </div>
     );
