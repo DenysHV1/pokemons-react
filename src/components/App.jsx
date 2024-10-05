@@ -105,7 +105,7 @@ export class App extends Component {
           Show Buttons
         </button>
         <button className="randomBtn" onClick={this.handlerRandomButtons}>
-          random
+          Random
         </button>
       </>
     );
