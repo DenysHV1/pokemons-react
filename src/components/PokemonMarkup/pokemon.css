@@ -119,6 +119,24 @@
   left: 20px;
   opacity: 0.6;
 }
+
+
+.restartBtn{
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid rgb(146, 148, 248);
+  position: relative;
+  overflow: hidden;
+  font-size: 0.6rem;
+  padding: 0.5rem 1rem;
+  color: #f4f4f4;
+  text-transform: uppercase;
+  background-color: transparent;
+  position: fixed;
+  bottom: 20px;
+  left: 33%;
+  opacity: 0.6;
+}
 /*todo end*/
 
 /*todo PokemonMarkup */
@@ -236,3 +254,159 @@ h1 {
     padding: 10px;
   }
 }
+
+.tryNum{
+  position: fixed;
+ top: -40px;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 36px;
+  font-weight: 800;
+  color: white;
+}
+
+.text-modal{
+animation: appear 5s;
+position: absolute;
+top: 40%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 12px;
+font-weight: 100;
+color: white;
+max-width: 700px;
+text-align: center;
+text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+}
+
+
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    font-size: 1px;
+    font-weight: 100;
+  }
+
+  80% {
+    opacity: 1;
+    font-size: 70px;
+    font-weight: 900;
+  }
+  100% {
+    opacity: 0;
+    font-size: 1px;
+    font-weight: 100;
+  }
+
+}
+
+
+.text-modal-next{
+  white-space: nowrap;
+  animation: appearNext 3s;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  font-weight: 100;
+  color: gold;
+  max-width: 700px;
+  text-align: center;
+  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+  }
+  
+  
+  
+  @keyframes appearNext {
+    0% {
+      opacity: 0;
+      font-size: 1px;
+      font-weight: 100;
+    }
+  
+    80% {
+      opacity: 1;
+      font-size: 70px;
+      font-weight: 900;
+    }
+    100% {
+      opacity: 0;
+      font-size: 1px;
+      font-weight: 100;
+    }
+  
+  }
+
+  .text-modal-victory{
+    white-space: nowrap;
+    animation: appearVictory 3.1s;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1px;
+    font-weight: 1;
+    opacity: 0;
+    color: gold;
+    max-width: 700px;
+    text-align: center;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+  }
+
+  @keyframes appearVictory {
+    0% {
+      opacity: 0;
+      font-size: 1px;
+      font-weight: 100;
+    }
+  
+    100% {
+      opacity: 1;
+      font-size: 55px;
+      font-weight: 900;
+    }
+  }
+
+  @media screen and (max-width:450px){
+    @keyframes appear {
+      0% {
+        opacity: 0;
+        font-size: 1px;
+        font-weight: 100;
+      }
+    
+      80% {
+        opacity: 1;
+        font-size: 55px;
+        font-weight: 900;
+      }
+      100% {
+        opacity: 0;
+        font-size: 1px;
+        font-weight: 100;
+      }
+    
+    }
+    
+    @keyframes appearNext {
+      0% {
+        opacity: 0;
+        font-size: 1px;
+        font-weight: 100;
+      }
+    
+      80% {
+        opacity: 1;
+        font-size: 50px;
+        font-weight: 900;
+      }
+      100% {
+        opacity: 0;
+        font-size: 1px;
+        font-weight: 100;
+      }
+    
+    }
+  }

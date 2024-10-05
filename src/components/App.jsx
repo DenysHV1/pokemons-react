@@ -13,7 +13,27 @@ export class App extends Component {
     buttonsInfo,
     btnRandom: 'buttonStyle',
     intervalRandom: null,
+    textModalStart: true,
+    textModalStartNext: false,
+    found: false,
+    counter: 0,
   };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ textModalStart: false });
+    }, 4900);
+    setTimeout(() => {
+      if (!this.state.textModalStart) {
+        setTimeout(() => {
+          this.setState({ textModalStartNext: true });
+        }, 100);
+        setTimeout(() => {
+          this.setState({ textModalStartNext: false });
+        }, 3000);
+      }
+    }, 4950);
+  }
 
   async componentDidUpdate(_, prevState) {
     if (this.state.pokemonName !== prevState.pokemonName) {
@@ -21,6 +41,23 @@ export class App extends Component {
         if (this.state.pokemonName) {
           const response = await pokemonApi(this.state.pokemonName);
           this.setState({ pokemonInfo: response });
+
+          if (response.base_experience >= 200) {
+            this.setState({ found: true, textModalStart: false });
+
+            this.setState(prevState => {
+              return {
+                counter: (prevState.counter += 1),
+              };
+            });
+          } else {
+            this.setState(prevState => {
+              return {
+                counter: (prevState.counter += 1),
+                textModalStart: false,
+              };
+            });
+          }
         }
       } catch (error) {
         console.error(error);
@@ -33,6 +70,10 @@ export class App extends Component {
       pokemonName: e.target.dataset.name,
       modal: 'modal-overlay is-open',
     });
+    this.setState({ textModalStartNext: false, textModalStartNext: false });
+    setTimeout(() => {
+      this.setState({ textModalStartNext: false });
+    }, 3101);
   };
 
   handlerCloseModal = e => {
@@ -43,6 +84,7 @@ export class App extends Component {
         modal: 'modal-overlay',
       });
     }
+    this.setState({ textModalStartNext: false });
   };
 
   handlerCloseModal2 = () => {
@@ -51,10 +93,33 @@ export class App extends Component {
       pokemonName: '',
       modal: 'modal-overlay',
     });
+    this.setState({ textModalStartNext: false });
   };
 
   handlerShoveButtons = () => {
     this.setState(({ blackOnBtn }) => ({ blackOnBtn: !blackOnBtn }));
+  };
+
+  handlerRestartButtons = () => {
+    this.setState({
+      textModalStart: true,
+      textModalStartNext: false,
+      found: false,
+      counter: 0,
+    });
+    setTimeout(() => {
+      this.setState({ textModalStart: false });
+    }, 4900);
+    setTimeout(() => {
+      if (!this.state.textModalStart) {
+        setTimeout(() => {
+          this.setState({ textModalStartNext: true });
+        }, 100);
+        setTimeout(() => {
+          this.setState({ textModalStartNext: false });
+        }, 3000);
+      }
+    }, 4950);
   };
 
   handlerRandomButtons = () => {
@@ -84,7 +149,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className="container">
         <div onClick={this.handlerButtons} className="buttonsContainer">
           <ButtonsMarkup
             shoveBtn={this.state.blackOnBtn}
@@ -107,6 +172,24 @@ export class App extends Component {
         <button className="randomBtn" onClick={this.handlerRandomButtons}>
           Random
         </button>
+        <button className="restartBtn" onClick={this.handlerRestartButtons}>
+          Restart
+        </button>
+        {this.state.textModalStart && (
+          <p className="text-modal">
+            Are you <br></br> lucky?<br></br> Find the <br></br>Legendary
+            <br></br> Pokemon
+          </p>
+        )}
+        {this.state.textModalStartNext && (
+          <p className="text-modal-next">Good luck😅</p>
+        )}
+        {this.state.found && (
+          <p className="text-modal-victory">
+            Victory🎉<br></br>You clicked <br></br> {this.state.counter} times
+          </p>
+        )}
+        <p className="tryNum">{this.state.counter}</p>
       </div>
     );
   }
