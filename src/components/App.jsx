@@ -102,7 +102,7 @@ export class App extends Component {
           </div>
         )}
         <button onClick={this.handlerShoveButtons} className="shove-buttons">
-          Shove Buttons
+          Show Buttons
         </button>
         <button className="randomBtn" onClick={this.handlerRandomButtons}>
           random
