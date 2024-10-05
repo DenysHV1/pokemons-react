@@ -84,7 +84,7 @@ export class App extends Component {
 
   render() {
     return (
-      <>
+      <div className='container'>
         <div onClick={this.handlerButtons} className="buttonsContainer">
           <ButtonsMarkup
             shoveBtn={this.state.blackOnBtn}
@@ -107,7 +107,7 @@ export class App extends Component {
         <button className="randomBtn" onClick={this.handlerRandomButtons}>
           Random
         </button>
-      </>
+      </div>
     );
   }
 }
