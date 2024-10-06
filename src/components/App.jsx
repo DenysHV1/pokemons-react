@@ -172,7 +172,6 @@ export class App extends Component {
           <div onClick={this.handlerCloseModal} className={this.state.modal}>
             <PokemonMarkup
               pokemonInfo={this.state.pokemonInfo}
-              pokemonName={this.state.pokemonName}
               closeModal2={this.handlerCloseModal2}
             ></PokemonMarkup>
           </div>
