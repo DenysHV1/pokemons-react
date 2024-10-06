@@ -44,7 +44,7 @@ export class App extends Component {
 
           if (response.base_experience >= 200) {
             this.setState({ found: true, textModalStart: false });
-
+            this.setState({textModalStartNext: false})
             this.setState(prevState => {
               return {
                 counter: (prevState.counter += 1),
@@ -74,7 +74,8 @@ export class App extends Component {
       pokemonName: e.target.dataset.name,
       modal: 'modal-overlay is-open',
     });
-    this.setState({ textModalStartNext: false, textModalStartNext: false });
+
+    this.setState({ textModalStartNext: false});
     setTimeout(() => {
       this.setState({ textModalStartNext: false });
     }, 3101);
@@ -88,7 +89,7 @@ export class App extends Component {
         modal: 'modal-overlay',
       });
     }
-        this.setState({ textModalStartNext: false, textModalStartNext: false });
+        this.setState({ textModalStartNext: false});
     setTimeout(() => {
       this.setState({ textModalStartNext: false });
     }, 3101);
@@ -100,7 +101,7 @@ export class App extends Component {
       pokemonName: '',
       modal: 'modal-overlay',
     });
-        this.setState({ textModalStartNext: false, textModalStartNext: false });
+        this.setState({ textModalStartNext: false});
     setTimeout(() => {
       this.setState({ textModalStartNext: false });
     }, 3101);
