@@ -79,4 +79,8 @@ export const buttonsInfo = [
 	  name: 'blastoise',
 	  id: 20,
 	},
+	{
+		name: 'pikachu',
+		id: 21,
+	  },
   ];
