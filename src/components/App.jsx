@@ -50,6 +50,9 @@ export class App extends Component {
                 counter: (prevState.counter += 1),
               };
             });
+            setTimeout(()=>{
+              this.setState({counter:0, found:false})
+            }, 8000)
           } else {
             this.setState(prevState => {
               return {
@@ -85,7 +88,10 @@ export class App extends Component {
         modal: 'modal-overlay',
       });
     }
-    this.setState({ textModalStartNext: false });
+        this.setState({ textModalStartNext: false, textModalStartNext: false });
+    setTimeout(() => {
+      this.setState({ textModalStartNext: false });
+    }, 3101);
   };
 
   handlerCloseModal2 = () => {
@@ -94,7 +100,10 @@ export class App extends Component {
       pokemonName: '',
       modal: 'modal-overlay',
     });
-    this.setState({ textModalStartNext: false });
+        this.setState({ textModalStartNext: false, textModalStartNext: false });
+    setTimeout(() => {
+      this.setState({ textModalStartNext: false });
+    }, 3101);
   };
 
   handlerShoveButtons = () => {
