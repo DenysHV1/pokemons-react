@@ -1,11 +1,38 @@
-import { Component } from 'react';
+import { Component, MouseEvent } from 'react';
 import { PokemonMarkup } from './PokemonMarkup/PokemonMarkup';
 import { pokemonApi } from './PokemonMarkup/pokemon-api';
-import { ButtonsMarkup } from './PokemonMarkup/ButtonsMarkup';
 import { buttonsInfo } from './buttons-info-arr';
+import { ButtonsMarkup } from './PokemonMarkup/ButtonsMarkup';
 
-export class App extends Component {
-  state = {
+interface IPropsApp {}
+interface IPokemonInfo {
+  name: string;
+  base_experience: number;
+  [key: string]: any;
+}
+
+export interface IButtonInfo {
+  id: number;
+  name: string;
+  [key: string]: any;
+}
+
+interface IStateApp {
+  pokemonInfo: IPokemonInfo | null;
+  pokemonName: string;
+  modal: string;
+  blackOnBtn: boolean;
+  buttonsInfo: IButtonInfo[];
+  btnRandom: string;
+  intervalRandom: number | null;
+  textModalStart: boolean;
+  textModalStartNext: boolean;
+  found: boolean;
+  counter: number;
+}
+
+export class App extends Component<IPropsApp, IStateApp> {
+  state: IStateApp = {
     pokemonInfo: null,
     pokemonName: '',
     modal: 'modal-overlay',
@@ -23,6 +50,7 @@ export class App extends Component {
     setTimeout(() => {
       this.setState({ textModalStart: false });
     }, 4900);
+
     setTimeout(() => {
       if (!this.state.textModalStart) {
         setTimeout(() => {
@@ -35,7 +63,7 @@ export class App extends Component {
     }, 4950);
   }
 
-  async componentDidUpdate(_, prevState) {
+  async componentDidUpdate(_: Readonly<IPropsApp>, prevState: Readonly<IStateApp>) {
     if (this.state.pokemonName !== prevState.pokemonName) {
       try {
         if (this.state.pokemonName) {
@@ -43,45 +71,41 @@ export class App extends Component {
           this.setState({ pokemonInfo: response });
 
           if (response.base_experience >= 200) {
-            this.setState({ found: true, textModalStart: false });
-            this.setState({textModalStartNext: false})
-            this.setState(prevState => {
-              return {
-                counter: (prevState.counter += 1),
-              };
-            });
-            setTimeout(()=>{
-              this.setState({counter:0, found:false})
-            }, 8000)
+            this.setState({ found: true, textModalStart: false, textModalStartNext: false });
+            this.setState((prevState) => ({
+              counter: prevState.counter + 1,
+            }));
+            setTimeout(() => {
+              this.setState({ counter: 0, found: false });
+            }, 8000);
           } else {
-            this.setState(prevState => {
-              return {
-                counter: (prevState.counter += 1),
-                textModalStart: false,
-              };
-            });
+            this.setState((prevState) => ({
+              counter: prevState.counter + 1,
+              textModalStart: false,
+            }));
           }
         }
-        
       } catch (error) {
         console.error(error);
       }
     }
   }
 
-  handlerButtons = e => {
+  handlerButtons = (e: MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const pokemonName = target.dataset.name || '';
     this.setState({
-      pokemonName: e.target.dataset.name,
+      pokemonName,
       modal: 'modal-overlay is-open',
+      textModalStartNext: false,
     });
 
-    this.setState({ textModalStartNext: false});
     setTimeout(() => {
       this.setState({ textModalStartNext: false });
     }, 3101);
   };
 
-  handlerCloseModal = e => {
+  handlerCloseModal = (e: MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget === e.target) {
       this.setState({
         pokemonInfo: null,
@@ -89,7 +113,7 @@ export class App extends Component {
         modal: 'modal-overlay',
       });
     }
-        this.setState({ textModalStartNext: false});
+    this.setState({ textModalStartNext: false });
     setTimeout(() => {
       this.setState({ textModalStartNext: false });
     }, 3101);
@@ -101,7 +125,7 @@ export class App extends Component {
       pokemonName: '',
       modal: 'modal-overlay',
     });
-        this.setState({ textModalStartNext: false});
+    this.setState({ textModalStartNext: false });
     setTimeout(() => {
       this.setState({ textModalStartNext: false });
     }, 3101);
@@ -118,9 +142,11 @@ export class App extends Component {
       found: false,
       counter: 0,
     });
+
     setTimeout(() => {
       this.setState({ textModalStart: false });
     }, 4900);
+
     setTimeout(() => {
       if (!this.state.textModalStart) {
         setTimeout(() => {
@@ -136,18 +162,15 @@ export class App extends Component {
   handlerRandomButtons = () => {
     const maxLength = this.state.buttonsInfo.length;
 
-    this.setState(({ buttonsInfo }) => {
-      return {
-        buttonsInfo: buttonsInfo.map(item => {
-          return {
-            ...item,
-            id: Math.round(Math.random() * (maxLength - 1) + 1),
-          };
-        }),
-      };
-    });
     this.setState(({ buttonsInfo }) => ({
-      buttonsInfo: buttonsInfo.toSorted((a, b) => a.id - b.id),
+      buttonsInfo: buttonsInfo.map((item) => ({
+        ...item,
+        id: Math.round(Math.random() * (maxLength - 1) + 1),
+      })),
+    }));
+
+    this.setState(({ buttonsInfo }) => ({
+      buttonsInfo: [...buttonsInfo].sort((a, b) => a.id - b.id),
     }));
 
     setTimeout(() => {
@@ -166,14 +189,14 @@ export class App extends Component {
             shoveBtn={this.state.blackOnBtn}
             buttonsInfo={this.state.buttonsInfo}
             btnRandom={this.state.btnRandom}
-          ></ButtonsMarkup>
+          />
         </div>
         {this.state.pokemonInfo && (
           <div onClick={this.handlerCloseModal} className={this.state.modal}>
             <PokemonMarkup
               pokemonInfo={this.state.pokemonInfo}
               closeModal2={this.handlerCloseModal2}
-            ></PokemonMarkup>
+            />
           </div>
         )}
         <button onClick={this.handlerShoveButtons} className="shove-buttons">
@@ -187,16 +210,14 @@ export class App extends Component {
         </button>
         {this.state.textModalStart && (
           <p className="text-modal">
-            Are you <br></br> lucky?<br></br> Find the <br></br>Legendary
-            <br></br> Pokemon
+            Are you <br /> lucky?<br /> Find the <br />Legendary<br /> Pokemon
           </p>
         )}
-        {this.state.textModalStartNext && (
-          <p className="text-modal-next">Good luck😅</p>
-        )}
+        {this.state.textModalStartNext && <p className="text-modal-next">Good luck😅</p>}
         {this.state.found && (
           <p className="text-modal-victory">
-            Victory🎉<br></br>You clicked <br></br> {this.state.counter} times
+            Victory🎉<br />
+            You clicked <br /> {this.state.counter} times
           </p>
         )}
         <p className="tryNum">{this.state.counter}</p>
@@ -204,3 +225,4 @@ export class App extends Component {
     );
   }
 }
+

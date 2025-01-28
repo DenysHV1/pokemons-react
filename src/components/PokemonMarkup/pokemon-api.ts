@@ -1,4 +1,4 @@
-export const pokemonApi = async pokemon => {
+export const pokemonApi = async (pokemon: string) => {
   try {
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${pokemon}`
